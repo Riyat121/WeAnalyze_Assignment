@@ -6,7 +6,6 @@ export default function TicketDetails() {
         Laudantium neque veritatis
       </h2>
 
-      {/* Reply Box */}
       <div className="bg-white p-4 rounded shadow mb-4">
         <textarea
           placeholder="Add a reply..."
@@ -15,7 +14,7 @@ export default function TicketDetails() {
         />
       </div>
 
-      {/* Messages */}
+      
       {[1,2].map(msg => (
         <div key={msg} className="bg-white p-4 rounded shadow mb-4">
           <div className="font-semibold">Allie Harmon</div>
