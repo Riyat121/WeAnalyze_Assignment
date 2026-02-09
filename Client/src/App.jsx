@@ -1,11 +1,13 @@
-import React from 'react'
+import AppLayout from "./layout/AppLayout";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
-    <div>
-      Home page 
-    </div>
-  )
+    <AppLayout>
+      <Dashboard />
+    </AppLayout>
+  );
 }
 
-export default App
+export default App;
+
