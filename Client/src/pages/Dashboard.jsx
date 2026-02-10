@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TicketList from "../components/tickets/TicketList";
 import TicketDetails from "../components/ticketDetails/TicketDetails";
-import TicketViewsSidebar from "../components/sidebar/TicketViewsSidebar";
+
 
 export default function Dashboard() {
 
@@ -16,7 +16,7 @@ export default function Dashboard() {
   return (
     <div className="flex flex-1">
 
-      <TicketViewsSidebar />
+    
 
       <TicketList
         tickets={tickets}

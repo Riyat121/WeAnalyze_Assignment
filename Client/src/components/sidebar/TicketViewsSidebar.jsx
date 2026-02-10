@@ -1,27 +1,31 @@
-const views = [
-  { name: "My Tickets", count: 9 },
-  { name: "Past Due", count: 4 },
-  { name: "High Priority", count: 11 },
-  { name: "Unassigned", count: 98 },
-  { name: "All Tickets", count: 2192 },
-];
+import { useState } from "react";
 
 export default function TicketViewsSidebar() {
-  return (
-    <div className="w-64 bg-gray-100 p-4">
-      
-      <h3 className="text-sm text-gray-500 mb-4">TICKET VIEWS</h3>
+  const [activeView, setActiveView] = useState("My Tickets");
 
-      {views.map((v, i) => (
+  const views = [
+    "My Tickets",
+    "Past Due",
+    "High Priority",
+    "Unassigned",
+    "All Tickets"
+  ];
+
+  return (
+    <div className="w-64 bg-white border-r p-4">
+      {views.map(view => (
         <div
-          key={i}
-          className="flex justify-between p-2 hover:bg-blue-100 rounded cursor-pointer"
+          key={view}
+          onClick={() => setActiveView(view)}
+          className={`p-2 rounded cursor-pointer mb-1
+            ${activeView === view
+              ? "bg-blue-50 text-blue-600"
+              : "hover:bg-gray-50"}
+          `}
         >
-          <span>{v.name}</span>
-          <span className="text-gray-500">{v.count}</span>
+          {view}
         </div>
       ))}
-
     </div>
   );
 }
