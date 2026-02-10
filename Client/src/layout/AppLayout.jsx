@@ -1,5 +1,5 @@
 import TopNavbar from "../components/navbar/TopNavbar";
-
+import IconsSidebar from "../components/sidebar/IconsSidebar";
 
 
 export default function AppLayout({ children }) {
@@ -11,7 +11,7 @@ export default function AppLayout({ children }) {
 
       <div className="flex flex-1 overflow-hidden">
         
-      
+         <IconsSidebar />
         
 
         
