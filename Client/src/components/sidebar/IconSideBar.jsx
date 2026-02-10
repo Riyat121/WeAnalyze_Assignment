@@ -11,7 +11,7 @@ import {
   FiSettings
 } from "react-icons/fi";
 
-export default function IconsSidebar() {
+export default function IconSidebar() {
 
   const icons = [
     FiHome,
