@@ -10,13 +10,21 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const defaultOrigins = [
+  "http://localhost:5173",
+  "https://we-analyze-assignment-ty5r.vercel.app",
+  "https://we-analyze-assignment-ty5r-j4g2whjok-riyat121s-projects.vercel.app"
+];
+const envOrigins = (process.env.CORS_ORIGIN || "")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+const allowedOrigins = envOrigins.length ? envOrigins : defaultOrigins;
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://we-analyze-assignment-ty5r-j4g2whjok-riyat121s-projects.vercel.app",
-    ],
-    credentials: true,
+    origin: allowedOrigins,
+    credentials: true
   })
 );
 
