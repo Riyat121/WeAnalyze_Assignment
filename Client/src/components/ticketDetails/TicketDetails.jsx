@@ -7,10 +7,13 @@ export default function TicketDetails({ ticket }) {
   const [activeTab, setActiveTab] = useState("public");
   const [reply, setReply] = useState("");
   const [publicMsgs, setPublicMsgs] = useState([
-    { id: 1, text: "Public message example" }
+    { id: 1, author: "Allie Harmon", time: "Feb 9, 2022 10:31 AM", text: "Ex beatae aliquid mollitia. Enim doloremque molestiae voluptatem recusandae." },
+    { id: 2, author: "Danny Amacher", time: "Feb 9, 2022 11:02 AM", text: "Maxime beatae nostrum ut. Deserunt totam aut nihil quo beatae." },
+    { id: 3, author: "Allie Harmon", time: "Feb 9, 2022 11:18 AM", text: "Quas non delectus praesentium est illum vitae nemo iure." }
   ]);
   const [privateMsgs, setPrivateMsgs] = useState([
-    { id: 2, text: "Private note example" }
+    { id: 4, author: "Allie Harmon", time: "Feb 9, 2022 11:35 AM", text: "Private note: follow up with customer on the attachment." },
+    { id: 5, author: "Danny Amacher", time: "Feb 9, 2022 12:10 PM", text: "Internal: check logs for OPS-102 before replying." }
   ]);
 
   const handleSend = () => {
@@ -35,20 +38,30 @@ export default function TicketDetails({ ticket }) {
   }
 
   return (
-    <div className="flex-1 p-6 bg-gray-50">
+    <div className="flex-1 p-6 bg-gradient-to-b from-gray-50 to-white">
 
-      <h2 className="text-xl font-semibold mb-4">
-        {ticket.title}
-      </h2>
+      <div className="flex items-start justify-between mb-4">
+        <div>
+          <h2 className="text-xl font-semibold text-gray-800">
+            {ticket.title}
+          </h2>
+          <p className="text-xs text-gray-400 mt-1">
+            {ticket.code} • Created Jun 2 • {ticket.project || "Administrative"}
+          </p>
+        </div>
+        <button className="text-xs px-3 py-1.5 rounded-full bg-blue-600 text-white shadow-sm">
+          To Do
+        </button>
+      </div>
 
       {/* Tabs */}
-      <div className="flex gap-6 border-b mb-4">
+      <div className="inline-flex gap-2 bg-white border rounded-full p-1 mb-4 shadow-sm">
 
         <button
           onClick={() => setActiveTab("public")}
           className={activeTab === "public"
-            ? "border-b-2 border-blue-500 pb-2"
-            : "pb-2 text-gray-400"}
+            ? "px-4 py-1.5 text-sm rounded-full bg-blue-600 text-white"
+            : "px-4 py-1.5 text-sm rounded-full text-gray-500 hover:text-gray-700"}
         >
           Public Reply
         </button>
@@ -56,8 +69,8 @@ export default function TicketDetails({ ticket }) {
         <button
           onClick={() => setActiveTab("private")}
           className={activeTab === "private"
-            ? "border-b-2 border-blue-500 pb-2"
-            : "pb-2 text-gray-400"}
+            ? "px-4 py-1.5 text-sm rounded-full bg-blue-600 text-white"
+            : "px-4 py-1.5 text-sm rounded-full text-gray-500 hover:text-gray-700"}
         >
           Private Comment
         </button>

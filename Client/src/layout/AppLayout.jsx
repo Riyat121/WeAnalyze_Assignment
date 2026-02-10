@@ -2,6 +2,7 @@ import TopNavbar from "../components/navbar/TopNavbar";
 import IconSidebar from "../components/sidebar/IconSideBar";
 import TicketViewsSidebar from "../components/sidebar/TicketViewsSidebar";
 import { LayoutProvider, useLayout } from "../context/LayoutContext";
+import CreateKnowledgeDrawer from "../components/create/CreateKnowledgeDrawer";
 
 
 export default function AppLayout({ children }) {
@@ -34,6 +35,7 @@ function AppLayoutInner({ children }) {
         <div className="flex flex-1">{children}</div>
 
       </div>
+      <CreateKnowledgeDrawer />
     </div>
   );
 }

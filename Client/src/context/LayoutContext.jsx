@@ -4,9 +4,10 @@ const LayoutContext = createContext(null);
 
 export function LayoutProvider({ children }) {
   const [isTicketViewsOpen, setIsTicketViewsOpen] = useState(true);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
 
   return (
-    <LayoutContext.Provider value={{ isTicketViewsOpen, setIsTicketViewsOpen }}>
+    <LayoutContext.Provider value={{ isTicketViewsOpen, setIsTicketViewsOpen, isCreateOpen, setIsCreateOpen }}>
       {children}
     </LayoutContext.Provider>
   );

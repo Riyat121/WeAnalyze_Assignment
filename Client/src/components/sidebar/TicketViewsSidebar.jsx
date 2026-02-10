@@ -16,10 +16,10 @@ export default function TicketViewsSidebar() {
   ];
 
   return (
-    <div className="w-[260px] h-full bg-[#F6F8FB] border-r border-gray-200 p-4 flex flex-col">
+    <div className="w-[260px] h-full bg-gradient-to-b from-[#F7F9FC] to-[#EEF2F7] border-r border-gray-200 p-4 flex flex-col">
 
       {/* TITLE */}
-      <div className="flex items-center justify-between text-xs text-gray-400 font-semibold tracking-wider mb-3">
+      <div className="flex items-center justify-between text-[11px] text-gray-400 font-semibold tracking-wider mb-3">
         <div className="flex items-center gap-2">
           <span>TICKET VIEWS</span>
           <FiChevronDown size={14} />
@@ -41,11 +41,11 @@ export default function TicketViewsSidebar() {
           <div
             key={view.name}
             onClick={() => setActive(view.name)}
-            className={`flex items-center justify-between px-3 py-2 rounded-lg cursor-pointer transition-all
+            className={`flex items-center justify-between px-3 py-2 rounded-xl cursor-pointer transition-all border
               
               ${active === view.name
-                ? "bg-blue-600 text-white shadow-sm"
-                : "text-gray-600 hover:bg-white"}
+                ? "bg-blue-600 text-white shadow-sm border-blue-500"
+                : "text-gray-700 hover:bg-white border-transparent"}
             `}
           >
             <div className="flex items-center gap-2">
@@ -61,7 +61,7 @@ export default function TicketViewsSidebar() {
 
             {/* COUNT BADGE */}
             <span
-              className={`text-xs px-2 py-0.5 rounded-md
+              className={`text-[11px] px-2 py-0.5 rounded-full
                 ${active === view.name
                   ? "bg-white/20 text-white"
                   : "bg-gray-200 text-gray-600"}
@@ -77,12 +77,12 @@ export default function TicketViewsSidebar() {
       </div>
 
       {/* DIVIDER */}
-      <div className="my-5 border-t border-gray-200" />
+      <div className="my-5 border-t border-gray-200/70" />
 
       {/* LIVE CHATS */}
-      <div className="space-y-3">
+      <div className="space-y-3 bg-white/70 border border-white/60 rounded-xl p-3">
 
-        <div className="flex items-center justify-between text-gray-500 hover:text-blue-600 cursor-pointer">
+        <div className="flex items-center justify-between text-gray-600 hover:text-blue-600 cursor-pointer">
           <div className="flex items-center gap-2">
             <FiMessageSquare size={16} />
             <span className="text-sm font-medium">LIVE CHATS</span>
@@ -93,7 +93,7 @@ export default function TicketViewsSidebar() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between text-gray-500 hover:text-blue-600 cursor-pointer">
+        <div className="flex items-center justify-between text-gray-600 hover:text-blue-600 cursor-pointer">
           <div className="flex items-center gap-2">
             <FiGrid size={16} />
             <span className="text-sm font-medium">BOARDS</span>
