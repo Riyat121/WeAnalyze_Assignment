@@ -49,19 +49,17 @@ export default function TicketDetails({ ticket }) {
             {ticket.code} • Created Jun 2 • {ticket.project || "Administrative"}
           </p>
         </div>
-        <button className="text-xs px-3 py-1.5 rounded-full bg-blue-600 text-white shadow-sm">
-          To Do
-        </button>
+       
       </div>
 
       {/* Tabs */}
-      <div className="inline-flex gap-2 bg-white border rounded-full p-1 mb-4 shadow-sm">
+      <div className="flex gap-6 border-b mb-4">
 
         <button
           onClick={() => setActiveTab("public")}
           className={activeTab === "public"
-            ? "px-4 py-1.5 text-sm rounded-full bg-blue-600 text-white"
-            : "px-4 py-1.5 text-sm rounded-full text-gray-500 hover:text-gray-700"}
+            ? "text-sm text-gray-700 border-b-2 border-blue-500 pb-2"
+            : "text-sm text-gray-400 pb-2 hover:text-gray-600"}
         >
           Public Reply
         </button>
@@ -69,8 +67,8 @@ export default function TicketDetails({ ticket }) {
         <button
           onClick={() => setActiveTab("private")}
           className={activeTab === "private"
-            ? "px-4 py-1.5 text-sm rounded-full bg-blue-600 text-white"
-            : "px-4 py-1.5 text-sm rounded-full text-gray-500 hover:text-gray-700"}
+            ? "text-sm text-gray-700 border-b-2 border-blue-500 pb-2"
+            : "text-sm text-gray-400 pb-2 hover:text-gray-600"}
         >
           Private Comment
         </button>
