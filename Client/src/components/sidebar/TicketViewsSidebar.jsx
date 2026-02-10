@@ -16,11 +16,11 @@ export default function TicketViewsSidebar() {
   ];
 
   return (
-    <div className="w-[260px] h-full bg-gradient-to-b from-[#F7F9FC] to-[#EEF2F7] border-r border-gray-200 p-4 flex flex-col">
+    <div className="w-[ 260px] h-full bg-gradient-to-b from-[#F7F9FC] to-[#EEF2F7] border-r border-gray-200 p-4 flex flex-col">
 
       {/* TITLE */}
       <div className="flex items-center justify-between text-[11px] text-gray-400 font-semibold tracking-wider mb-3">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center0 gap-2">
           <span>TICKET VIEWS</span>
           <FiChevronDown size={14} />
         </div>

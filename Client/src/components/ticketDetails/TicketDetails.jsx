@@ -1,32 +1,102 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReplyBox from "./ReplyBox";
 import MessageList from "./MessageList";
+import { COMMENTS_API } from "../../config/api";
 
 export default function TicketDetails({ ticket }) {
 
   const [activeTab, setActiveTab] = useState("public");
   const [reply, setReply] = useState("");
-  const [publicMsgs, setPublicMsgs] = useState([
-    { id: 1, author: "Allie Harmon", time: "Feb 9, 2022 10:31 AM", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
-    { id: 2, author: "Danny Amacher", time: "Feb 10, 2022 11:02 AM", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
-    { id: 3, author: "Allie Harmon", time: "Feb 11, 2022 11:18 AM", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." }
-  ]);
-  const [privateMsgs, setPrivateMsgs] = useState([
-    { id: 4, author: "Allie Harmon", time: "Feb 9, 2022 11:35 AM", text: "Private note: follow up with customer on the attachment." },
-    { id: 5, author: "Danny Amacher", time: "Feb 10, 2022 12:10 PM", text: "Internal: check logs for OPS-102 before replying." }
-  ]);
+  const [author, setAuthor] = useState("Allie Harmon");
+  const [publicMsgs, setPublicMsgs] = useState([]);
+  const [privateMsgs, setPrivateMsgs] = useState([]);
+  const authors = ["Allie Harmon", "Danny Amacher", "Priya Singh", "Riya Tiwari"];
+
+  useEffect(() => {
+    if (!ticket) return;
+    const controller = new AbortController();
+
+    const load = async () => {
+      try {
+        const [pubRes, privRes] = await Promise.all([
+          fetch(`${COMMENTS_API}?ticketId=${ticket.id}&isPrivate=false`, { signal: controller.signal }),
+          fetch(`${COMMENTS_API}?ticketId=${ticket.id}&isPrivate=true`, { signal: controller.signal })
+        ]);
+        const [pub, priv] = await Promise.all([pubRes.json(), privRes.json()]);
+        setPublicMsgs(pub);
+        setPrivateMsgs(priv);
+      } catch (err) {
+        if (err.name !== "AbortError") {
+          console.error("Failed to load comments", err);
+        }
+      }
+    };
+
+    load();
+    return () => controller.abort();
+  }, [ticket?.id]);
 
   const handleSend = () => {
     const text = reply.trim();
     if (!text) return;
 
-    const newMessage = { id: Date.now(), text };
-    if (activeTab === "public") {
-      setPublicMsgs(prev => [...prev, newMessage]);
-    } else {
-      setPrivateMsgs(prev => [...prev, newMessage]);
-    }
-    setReply("");
+    const payload = {
+      ticketId: String(ticket.id),
+      author,
+      text,
+      isPrivate: activeTab === "private"
+    };
+
+    fetch(COMMENTS_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then(res => res.json())
+      .then(created => {
+        if (activeTab === "public") {
+          setPublicMsgs(prev => [...prev, created]);
+        } else {
+          setPrivateMsgs(prev => [...prev, created]);
+        }
+        setReply("");
+      })
+      .catch(err => {
+        console.error("Failed to create comment", err);
+      });
+  };
+
+  const handleDelete = (id, isPrivate) => {
+    fetch(`${COMMENTS_API}/${id}`, { method: "DELETE" })
+      .then(() => {
+        if (isPrivate) {
+          setPrivateMsgs(prev => prev.filter(m => m._id !== id));
+        } else {
+          setPublicMsgs(prev => prev.filter(m => m._id !== id));
+        }
+      })
+      .catch(err => {
+        console.error("Failed to delete comment", err);
+      });
+  };
+
+  const handleUpdate = (id, text, isPrivate) => {
+    fetch(`${COMMENTS_API}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text })
+    })
+      .then(res => res.json())
+      .then(updated => {
+        if (isPrivate) {
+          setPrivateMsgs(prev => prev.map(m => (m._id === id ? updated : m)));
+        } else {
+          setPublicMsgs(prev => prev.map(m => (m._id === id ? updated : m)));
+        }
+      })
+      .catch(err => {
+        console.error("Failed to update comment", err);
+      });
   };
 
   if (!ticket) {
@@ -75,9 +145,26 @@ export default function TicketDetails({ ticket }) {
 
       </div>
 
+      <div className="flex items-center gap-3 mb-3">
+        <label className="text-xs text-gray-500">Author</label>
+        <select
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+          className="text-xs border rounded-md px-2 py-1 text-gray-600 bg-white"
+        >
+          {authors.map(a => (
+            <option key={a} value={a}>{a}</option>
+          ))}
+        </select>
+      </div>
+
       <ReplyBox reply={reply} setReply={setReply} onSend={handleSend} />
 
-      <MessageList messages={activeTab === "public" ? publicMsgs : privateMsgs} />
+      <MessageList
+        messages={activeTab === "public" ? publicMsgs : privateMsgs}
+        onDelete={(id) => handleDelete(id, activeTab === "private")}
+        onUpdate={(id, text) => handleUpdate(id, text, activeTab === "private")}
+      />
 
     </div>
   );
