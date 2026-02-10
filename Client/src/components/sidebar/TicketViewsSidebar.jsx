@@ -8,11 +8,11 @@ export default function TicketViewsSidebar() {
   const { setIsTicketViewsOpen } = useLayout();
 
   const ticketViews = [
-    { name: "My Tickets", count: 9 },
-    { name: "Past Due", count: 4 },
-    { name: "High Priority", count: 11 },
-    { name: "Unassigned", count: 98 },
-    { name: "All Tickets", count: 2192 },
+    { name: "My Tickets", count: 1 },
+    { name: "Past Due", count: 2 },
+    { name: "High Priority", count: 3 },
+    { name: "Unassigned", count: 49 },
+    { name: "All Tickets", count: 5799 },
   ];
 
   return (

@@ -7,13 +7,13 @@ export default function TicketDetails({ ticket }) {
   const [activeTab, setActiveTab] = useState("public");
   const [reply, setReply] = useState("");
   const [publicMsgs, setPublicMsgs] = useState([
-    { id: 1, author: "Allie Harmon", time: "Feb 9, 2022 10:31 AM", text: "Ex beatae aliquid mollitia. Enim doloremque molestiae voluptatem recusandae." },
-    { id: 2, author: "Danny Amacher", time: "Feb 9, 2022 11:02 AM", text: "Maxime beatae nostrum ut. Deserunt totam aut nihil quo beatae." },
-    { id: 3, author: "Allie Harmon", time: "Feb 9, 2022 11:18 AM", text: "Quas non delectus praesentium est illum vitae nemo iure." }
+    { id: 1, author: "Allie Harmon", time: "Feb 9, 2022 10:31 AM", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
+    { id: 2, author: "Danny Amacher", time: "Feb 10, 2022 11:02 AM", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." },
+    { id: 3, author: "Allie Harmon", time: "Feb 11, 2022 11:18 AM", text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." }
   ]);
   const [privateMsgs, setPrivateMsgs] = useState([
     { id: 4, author: "Allie Harmon", time: "Feb 9, 2022 11:35 AM", text: "Private note: follow up with customer on the attachment." },
-    { id: 5, author: "Danny Amacher", time: "Feb 9, 2022 12:10 PM", text: "Internal: check logs for OPS-102 before replying." }
+    { id: 5, author: "Danny Amacher", time: "Feb 10, 2022 12:10 PM", text: "Internal: check logs for OPS-102 before replying." }
   ]);
 
   const handleSend = () => {

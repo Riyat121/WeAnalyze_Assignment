@@ -10,21 +10,34 @@ export default function TicketItem({ ticket, isSelected, onClick }) {
         }`}
     >
       <div className="flex items-start justify-between gap-3">
-        <div>
-          <div className="font-medium text-sm text-gray-800">{ticket.title}</div>
-          <div className="text-xs text-gray-400 mt-1">
-            {ticket.code} • To Do
+        <div className="flex items-start gap-3">
+          <div className="pt-0.5">
+            <input
+              type="checkbox"
+              className="h-4 w-4 rounded border-gray-300 text-blue-600"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+          <div>
+            <div className="font-medium text-sm text-gray-800">{ticket.title}</div>
+            <div className="text-xs text-gray-400 mt-1 flex items-center gap-2">
+              <span>{ticket.code}</span>
+              <span className="px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 font-semibold">
+                To Do
+              </span>
+            </div>
           </div>
         </div>
-        <div className="h-8 w-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 text-white text-xs font-semibold flex items-center justify-center">
+        <div className="h-8 w-8 rounded-full bg-gray-200 text-gray-600 text-xs font-semibold flex items-center justify-center">
           {ticket.code?.slice(0, 2)}
         </div>
       </div>
       <div className="flex items-center justify-between mt-2">
         <span className="text-[11px] text-gray-400">{ticket.date || "Today"}</span>
-        <span className="text-[11px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 font-semibold">
-          {ticket.priority || "Medium"}
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-[11px] text-gray-400">Jun 2</span>
+          <span className="h-5 w-5 rounded-full bg-gray-200" />
+        </div>
       </div>
     </div>
   );

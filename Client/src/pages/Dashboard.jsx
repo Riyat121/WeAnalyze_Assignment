@@ -1,6 +1,7 @@
 import { useState } from "react";
 import TicketList from "../components/tickets/TicketList";
 import TicketDetails from "../components/ticketDetails/TicketDetails";
+import RightSidebar from "../components/ticketDetails/RightSidebar";
 
 
 export default function Dashboard() {
@@ -117,6 +118,7 @@ export default function Dashboard() {
       />
 
       <TicketDetails ticket={selectedTicket} />
+      <RightSidebar />
 
     </div>
   );
