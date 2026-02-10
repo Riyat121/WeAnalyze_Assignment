@@ -1,14 +1,4 @@
-export default function MessageList({ tab }) {
-
-  const publicMsgs = [
-    { id: 1, text: "Public message example" }
-  ];
-
-  const privateMsgs = [
-    { id: 2, text: "Private note example" }
-  ];
-
-  const messages = tab === "public" ? publicMsgs : privateMsgs;
+export default function MessageList({ messages }) {
 
   return (
     <div className="space-y-3">

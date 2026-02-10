@@ -6,6 +6,25 @@ export default function TicketDetails({ ticket }) {
 
   const [activeTab, setActiveTab] = useState("public");
   const [reply, setReply] = useState("");
+  const [publicMsgs, setPublicMsgs] = useState([
+    { id: 1, text: "Public message example" }
+  ]);
+  const [privateMsgs, setPrivateMsgs] = useState([
+    { id: 2, text: "Private note example" }
+  ]);
+
+  const handleSend = () => {
+    const text = reply.trim();
+    if (!text) return;
+
+    const newMessage = { id: Date.now(), text };
+    if (activeTab === "public") {
+      setPublicMsgs(prev => [...prev, newMessage]);
+    } else {
+      setPrivateMsgs(prev => [...prev, newMessage]);
+    }
+    setReply("");
+  };
 
   if (!ticket) {
     return (
@@ -45,9 +64,9 @@ export default function TicketDetails({ ticket }) {
 
       </div>
 
-      <ReplyBox reply={reply} setReply={setReply} />
+      <ReplyBox reply={reply} setReply={setReply} onSend={handleSend} />
 
-      <MessageList tab={activeTab} />
+      <MessageList messages={activeTab === "public" ? publicMsgs : privateMsgs} />
 
     </div>
   );
